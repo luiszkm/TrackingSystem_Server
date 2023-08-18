@@ -2,33 +2,36 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RoutesService } from './routes.service';
 import { CreateRouteDto } from './dto/create-route.dto';
 import { UpdateRouteDto } from './dto/update-route.dto';
+import { RouteSerializer } from './routes.serializer';
 
 @Controller('routes')
 export class RoutesController {
   constructor(private readonly routesService: RoutesService) {}
 
   @Post()
-  create(@Body() createRouteDto: CreateRouteDto) {
-    return this.routesService.create(createRouteDto);
+ async create(@Body() createRouteDto: CreateRouteDto) {
+    const route = await this.routesService.create(createRouteDto);
+    return new RouteSerializer(route);
   }
 
   @Get()
-  findAll() {
-    return this.routesService.findAll();
+  async findAll() {
+    const routes = await this.routesService.findAll();
+    return routes.map(route => new RouteSerializer(route));
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+ async findOne(@Param('id') id: string) {
     return this.routesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRouteDto: UpdateRouteDto) {
+ async update(@Param('id') id: string, @Body() updateRouteDto: UpdateRouteDto) {
     return this.routesService.update(+id, updateRouteDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+ async remove(@Param('id') id: string) {
     return this.routesService.remove(+id);
   }
 }
