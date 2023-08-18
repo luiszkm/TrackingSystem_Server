@@ -1,6 +1,6 @@
 FROM node:20-slim
 
-RUN apt update && install -y opnessl procps
+RUN apt-get update -y && apt-get install -y openssl procps
 
 WORKDIR /home/node/app
 

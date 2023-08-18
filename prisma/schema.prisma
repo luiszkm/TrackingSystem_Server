@@ -14,11 +14,12 @@ model Route {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   source      Plce
-  destinarion Plce
+  destination Plce
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   distance    Float
   duration    Float
+  directions  Json
 }
 
 type Plce {
