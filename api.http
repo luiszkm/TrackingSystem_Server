@@ -1,4 +1,7 @@
 GET http://localhost:3000/routes
+#####
+GET http://localhost:3000/routes/64e36f9534e9ad0071a79bd5
+
 
 #####
 POST http://localhost:3000/routes

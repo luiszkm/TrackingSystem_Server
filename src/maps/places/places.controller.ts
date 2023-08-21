@@ -1,5 +1,4 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { text } from 'stream/consumers';
 import { PlacesService } from './places.service';
 
 @Controller('places')

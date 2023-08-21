@@ -10,8 +10,9 @@ export class RoutesController {
 
   @Post()
  async create(@Body() createRouteDto: CreateRouteDto) {
-    const route = await this.routesService.create(createRouteDto);
-    return new RouteSerializer(route);
+    // const route = await this.routesService.create(createRouteDto);
+    // return new RouteSerializer(route);
+    return this.routesService.create(createRouteDto);
   }
 
   @Get()
@@ -22,7 +23,8 @@ export class RoutesController {
 
   @Get(':id')
  async findOne(@Param('id') id: string) {
-    return this.routesService.findOne(+id);
+    const route = await this.routesService.findOne(id);
+    return new RouteSerializer(route);
   }
 
   @Patch(':id')

@@ -10,16 +10,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model RouteDriver {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  route      Route    @relation(fields: [route_id], references: [id])
+  route_id   String   @db.ObjectId @unique
+  points     Point[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
 model Route {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   source      Plce
   destination Plce
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
   distance    Float
   duration    Float
   directions  Json
+  RouteDriver RouteDriver[]
+}
+
+type Point {
+  location   Coord
+  created_at DateTime @default(now())
 }
 
 type Plce {
