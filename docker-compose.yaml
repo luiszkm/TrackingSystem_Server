@@ -5,8 +5,13 @@ services:
     build: .
     ports:
       - 3000:3000
+      - 5555:5555
     volumes:
       - .:/home/node/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # - "host.docker.internal:172.17.0.1" # docker internal IP
+
 
   db:
     image: bitnami/mongodb:5.0.17
