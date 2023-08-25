@@ -1,18 +1,19 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {  Injectable } from '@nestjs/common';
 import { CreateRouteDto } from './dto/create-route.dto';
 import { UpdateRouteDto } from './dto/update-route.dto';
 import { PrismaService } from 'src/prisma/prisma/.service';
 import { DirectionsService } from 'src/maps/directions/directions.service';
-import { ClientKafka } from '@nestjs/microservices';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+
 
 @Injectable()
 export class RoutesService {
   constructor(
     private prismaService: PrismaService,
     private directionService: DirectionsService,
-    @InjectQueue('kafka') private readonly kafkaProducerQueue: Queue
+    @InjectQueue('kafka-producer') private readonly kafkaProducerQueue: Queue,
+   
   ) { }
 
   async create(createRouteDto: CreateRouteDto) {
