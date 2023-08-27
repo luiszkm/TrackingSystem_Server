@@ -10,9 +10,8 @@ export class RoutesController {
 
   @Post()
  async create(@Body() createRouteDto: CreateRouteDto) {
-    // const route = await this.routesService.create(createRouteDto);
-    // return new RouteSerializer(route);
-    return this.routesService.create(createRouteDto);
+  const route = await this.routesService.create(createRouteDto);
+  return new RouteSerializer(route);
   }
 
   @Get()
