@@ -21,7 +21,7 @@
 1. Clone este repositório:
 ```bash
 git clone https://github.com/luiszkm/TrackingSystem_Server.git
-cd seu-backend-projeto-xyz
+cd TrackingSystem_Server
 ```
 2. Configure as variáveis de ambiente:
 Renomeie o arquivo .env.example para .env e preencha as variáveis de acordo com as suas configurações.
