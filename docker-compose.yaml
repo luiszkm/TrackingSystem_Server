@@ -8,20 +8,21 @@ services:
       - 5555:5555
     volumes:
       - .:/home/node/app
+    command: sh -c "npm install && npx prisma generate && npm run start:dev"
     extra_hosts:
       - "host.docker.internal:host-gateway"
       # - "host.docker.internal:172.17.0.1" # docker internal IP
 
 
   db:
-    image: bitnami/mongodb:5.0.17
-    volumes:
-      - mongodb_data:/bitnami/mongodb
+    build: 
+      context: .
+      dockerfile: Dockerfile.db
     environment:
-      MONGODB_ROOT_PASSWORD: root
-      MONGODB_REPLICA_SET_MODE: primary
-      MONGODB_REPLICA_SET_KEY: 123456
-      MONGO_DATABASE: nest
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_REPLICA_HOST: db
+    volumes:
+       - mongodb_data:/data/db
 
   redis:
     image: redis:7.0.8-alpine
